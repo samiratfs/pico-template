@@ -29,7 +29,7 @@ add_subdirectory(blink)
 #add_subdirectory(spi_master_slave)
 
 # Add FreeRTOS examples
-#add_subdirectory(freertos)
+add_subdirectory(freertos)
 
 add_compile_options(-Wall
         -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long int

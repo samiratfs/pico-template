@@ -11,7 +11,9 @@
 
 #define WAIT 2000
 
-static pico_cpp::GPIO_Pin ledPin(25,pico_cpp::PinType::Output);
+static pico_cpp::GPIO_Pin redLedPin(0,pico_cpp::PinType::Output);
+static pico_cpp::GPIO_Pin yellowLedPin(2,pico_cpp::PinType::Output);
+static pico_cpp::GPIO_Pin greenLedPin(3,pico_cpp::PinType::Output);
 TaskHandle_t xTaskOffHandle = NULL;
 TaskHandle_t xTaskOnHandle = NULL;
 
@@ -24,7 +26,9 @@ void vTaskCodeOn( void * pvParameters )
   for( ;; )
   {
     printf("led-on\t");
-    ledPin.set_high();
+    redLedPin.set_high();
+    yellowLedPin.set_high();
+    greenLedPin.set_high();
 
     nonBlockingDelay(WAIT);
 
@@ -38,7 +42,9 @@ void vTaskCodeOff( void * pvParameters )
   for( ;; )
   {
     printf("led-off\t");
-    ledPin.set_low();
+    redLedPin.set_low();
+    yellowLedPin.set_low();
+    greenLedPin.set_low();
 
     nonBlockingDelay(WAIT);
 
@@ -46,6 +52,7 @@ void vTaskCodeOff( void * pvParameters )
     printf("priorityOn: %i priorityOff: %i\r\n", int(uxTaskPriorityGet(xTaskOnHandle)), int(uxTaskPriorityGet(xTaskOffHandle)));
   }
 }
+
 
 int main() {
   stdio_init_all();
